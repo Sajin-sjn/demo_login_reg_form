@@ -1,0 +1,67 @@
+{%include 'public_header.html'%}
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<center>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Users</title>
+</head>
+<body>
+    {%if data['up']%}
+    <form action="" method="post">
+        <table>
+            <tr>
+                <th>Name</th>
+                <td><input type="text" name="fname" value="{{data['up'][0]['fname']}}"  id=""></td>
+            </tr>
+            <tr>
+                <th>Place</th>
+                <td><input type="text" name="place" value="{{data['up'][0]['place']}}" id=""></td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td><input type="text" name="phone" value="{{data['up'][0]['phone']}}"  id=""></td>
+            </tr>
+            <tr>
+                <th>
+                    <td><input type="submit" name="update" id=""></td>
+                </th>
+            </tr>
+        </table>
+    </form>
+
+    {%else%}
+
+    <table class="table admin_view_users_table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Place</th>
+                <th>Phone</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for i in data['view']%}
+            <tr class="login-row">
+                <td>{{i['fname']}}</td>
+                <td>{{i['place']}}</td>
+                <td>{{i['phone']}}</td>
+                <td><a href="?action=update&user_id={{i['user_id']}}"><i class="fa-solid fa-pen-to-square fa-lg"></i></a></td>
+                <td><a href="?action=delete&user_id={{i['user_id']}}"><i class="fa-solid fa-trash fa-lg"></i></a></td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+    {%endif%}
+
+    
+</body>
+</html>
+<br><br><br><br><br><br><br><br><br><br><br>
+</center>
+{%include 'public_footer.html'%}
