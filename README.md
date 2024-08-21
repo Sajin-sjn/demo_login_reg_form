@@ -25,10 +25,14 @@ This is a simple project having two usertypes Admin and User. User can register 
 
 3. Install Flask package if not installed
    -  python -> file location -> file location -> scripts -> navigate to directory - cmd ->
-    ```bash
-      pip install flask
+4.
+```bash
+    pip install flask
+```
+5.
+```bash
       pip install mysql-connector
-    ```
+```
 
 4. Run main.py
 5. Navigate to the the url.
