@@ -18,15 +18,17 @@ This is a simple project having two usertypes Admin and User. User can register 
     - **Server:** Wamp server
     - **MySql GUI:** Sqlyog
 
-1. Clone the repo
+2. Clone the repo
 ```bash
    git clone "https://github.com/Sajin-sjn/demo_login_reg_form.git"
+```
 
-2. Install Flask package if not installed
+3. Install Flask package if not installed
    -  python -> file location -> file location -> scripts -> navigate to directory - cmd ->
-   ```bash
+    ```bash
       pip install flask
       pip install mysql-connector
+    ```
 
-3. Run main.py
-4. Navigate to the the url.
+4. Run main.py
+5. Navigate to the the url.
