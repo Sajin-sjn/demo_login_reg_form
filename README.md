@@ -11,15 +11,15 @@ This is a simple project having two usertypes Admin and User. User can register 
 ## UI
 ### Home page
 
-<img src="/static/assets/img/home.png" alt="Description" width="400" height="300">
+<img src="/static/assets/img/home.png" alt="Description" width="400" height="250">
 
 ### Login page
 
-<img src="/static/assets/img/login.png" alt="Description" width="400" height="300">
+<img src="/static/assets/img/login.png" alt="Description" width="400" height="250">
 
 ### Registration page
 
-<img src="/static/assets/img/registration.png" alt="Description" width="400" height="300">
+<img src="/static/assets/img/registration.png" alt="Description" width="400" height="250">
 
 
 ## Installation
