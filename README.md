@@ -11,6 +11,8 @@ This is a simple project having two usertypes Admin and User. User can register 
 ## UI
 ### Home page
 
+![](/static/assets/img/home.png)
+
 
 
 ## Installation
