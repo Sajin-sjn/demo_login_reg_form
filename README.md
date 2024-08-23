@@ -43,5 +43,8 @@ This is a simple project having two usertypes Admin and User. User can register 
       pip install mysql-connector
 ```
 
+6. Import the demo.sql to SqlYog
+
+
 4. Run main.py
 5. Navigate to the the url.
