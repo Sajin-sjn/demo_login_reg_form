@@ -1,10 +1,13 @@
 from flask import *
 from database import *
+# from public import login_required 
 
 admin=Blueprint('admin',__name__)
 
 @admin.route('/admin_home')
+
 def admin_home():
+    
     return render_template("admin_home.html")
 
 @admin.route('/admin_view_users',methods=['get','post'])

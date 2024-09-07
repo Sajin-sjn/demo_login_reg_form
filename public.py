@@ -1,5 +1,7 @@
 from flask import *
 from database import *
+from werkzeug.security import check_password_hash
+from functools import wraps
 
 
 public=Blueprint('public',__name__)
@@ -8,6 +10,18 @@ public=Blueprint('public',__name__)
 @public.route('/')
 def home():
     return render_template("home.html")
+
+
+# def login_required(f):
+#     @wraps(f)
+#     def decorated_function(*args, **kwargs):
+#         if 'user_id' not in session:
+#             return redirect(url_for('public.login'))
+#         return f(*args, **kwargs)
+#     return decorated_function
+
+# __all__ = ['login_required']
+
 
 @public.route('/login',methods=['get','post'])
 def login():
@@ -27,10 +41,7 @@ def login():
                 if res2:
                     session['user'] = res2[0]['user_id']
                     return redirect(url_for('users.user_home'))
-
-
-
-    return render_template("login.html")
+    return render_template('login.html')
 
 @public.route('/registration',methods=['get','post'])
 def registration():
