@@ -1,13 +1,10 @@
 from flask import *
 from database import *
-# from public import login_required 
 
 admin=Blueprint('admin',__name__)
 
 @admin.route('/admin_home')
-
 def admin_home():
-    
     return render_template("admin_home.html")
 
 @admin.route('/admin_view_users',methods=['get','post'])
@@ -15,7 +12,7 @@ def admin_view_users():
     data={}
     qry1="select * from user"
     res1=select(qry1)
-    # print(res1,"________________________")
+    
     if res1:
         data['view']=res1
         print(data['view'],"+++++++++++++++++++++++++++++")

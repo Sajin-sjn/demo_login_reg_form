@@ -1,7 +1,7 @@
 from flask import *
 from database import *
-from werkzeug.security import check_password_hash
-from functools import wraps
+# from werkzeug.security import check_password_hash
+# from functools import wraps
 
 
 public=Blueprint('public',__name__)
@@ -12,36 +12,43 @@ def home():
     return render_template("home.html")
 
 
-# def login_required(f):
-#     @wraps(f)
-#     def decorated_function(*args, **kwargs):
-#         if 'user_id' not in session:
-#             return redirect(url_for('public.login'))
-#         return f(*args, **kwargs)
-#     return decorated_function
-
-# __all__ = ['login_required']
-
-
-@public.route('/login',methods=['get','post'])
+@public.route('/login', methods=['GET', 'POST'])
 def login():
-    if 'submit' in request.form:
-        username=request.form['username']
-        password=request.form['password']
-
-        qry1="select * from login where username='%s' and password='%s'"%(username,password)
-        res1=select(qry1)
+    # Check if the user is already logged in
+    if 'log' in session:
+        # Redirect the user based on their usertype
+        qry1 = "select * from login where login_id='%s'" % (session['log'])
+        res1 = select(qry1)
         if res1:
-            session['log']=res1[0]['login_id']
             if res1[0]['usertype'] == 'admin':
                 return redirect(url_for('admin.admin_home'))
-            if res1[0]['usertype'] == 'user':
-                qry2="select * from user where login_id='%s'"%(session['log'])
-                res2=select(qry2)
+            elif res1[0]['usertype'] == 'user':
+                return redirect(url_for('users.user_home'))
+
+    # If the user is not logged in, process the login request
+    if 'submit' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+
+        qry1 = "select * from login where username='%s' and password='%s'" % (username, password)
+        res1 = select(qry1)
+        if res1:
+            session['log'] = res1[0]['login_id']
+            if res1[0]['usertype'] == 'admin':
+                return redirect(url_for('admin.admin_home'))
+            elif res1[0]['usertype'] == 'user':
+                qry2 = "select * from user where login_id='%s'" % (session['log'])
+                res2 = select(qry2)
                 if res2:
                     session['user'] = res2[0]['user_id']
                     return redirect(url_for('users.user_home'))
-    return render_template('login.html')
+
+    response = make_response(render_template('login.html'))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    
+    return response
 
 @public.route('/registration',methods=['get','post'])
 def registration():
@@ -62,4 +69,10 @@ def registration():
         return redirect('/')
 
     return render_template("registration.html")
+
+
+@public.route('/logout')
+def logout():
+    session.clear()  # Clear all session data
+    return redirect(url_for('public.home'))  # Redirect to login page
 
